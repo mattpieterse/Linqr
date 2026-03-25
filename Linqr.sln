@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linqr.CLI", "Linqr.CLI\Linqr.CLI.csproj", "{DD920E36-EDA1-4425-886F-DE51BEA9195E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD920E36-EDA1-4425-886F-DE51BEA9195E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD920E36-EDA1-4425-886F-DE51BEA9195E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD920E36-EDA1-4425-886F-DE51BEA9195E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD920E36-EDA1-4425-886F-DE51BEA9195E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

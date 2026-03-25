@@ -1,0 +1,19 @@
+﻿{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Debug"
+    },
+    "Using": [
+      "Serilog.Sinks.File"
+    ],
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": {
+          "outputTemplate": "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}",
+          "path": "serilog.txt"
+        }
+      }
+    ]
+  }
+}

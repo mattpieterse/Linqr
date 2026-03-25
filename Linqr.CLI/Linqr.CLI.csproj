@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyVersion></AssemblyVersion>
+        <Version>0.0.100</Version>
+        <Title>Linqr</Title>
+        <Authors>mattpieterse</Authors>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="JetBrains.Annotations" Version="2025.2.4" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="11.0.0-preview.2.26159.112" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0-preview.2.26159.112" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0-preview.2.26159.112" />
+      <PackageReference Include="Net.Codecrete.QrCodeGenerator" Version="2.1.0" />
+      <PackageReference Include="Serilog" Version="4.3.2-dev-02419" />
+      <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
+      <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1-dev-02330" />
+      <PackageReference Include="Serilog.Sinks.File" Version="8.0.0-nblumhardt-02322" />
+      <PackageReference Include="Spectre.Console.Cli" Version="1.0.0-alpha.0.15" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Core\Commands\" />
+      <Folder Include="Core\Services\" />
+      <Folder Include="Data\" />
+      <Folder Include="View\Components\" />
+      <Folder Include="View\Presentation\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="logging.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="options.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
