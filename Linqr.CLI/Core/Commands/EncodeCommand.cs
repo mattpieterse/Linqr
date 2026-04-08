@@ -51,6 +51,9 @@ public sealed class EncodeCommand
             )
         };
 
+        if (options.ClearTerminal)
+            AnsiConsole.Clear();
+
         AnsiConsole.Write(panel);
 
         return (int) ExitCode.Success;

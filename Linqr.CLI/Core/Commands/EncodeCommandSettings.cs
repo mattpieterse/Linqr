@@ -26,18 +26,25 @@ public sealed class EncodeCommandSettings
 
 #region Arguments > Flags
 
-    [CommandOption("-c|--use-canvas")]
+    [CommandOption("--use-canvas")]
     [Description(
         "Draw the QR code using the improved canvas (may cause artifacts)."
     )]
     public bool UseCanvasWidget { get; [UsedImplicitly] set; } = false;
 
 
-    [CommandOption("-a|--use-compat")]
+    [CommandOption("--use-compat")]
     [Description(
         "Draw the QR code using the ASCII-only compatability renderer (default)."
     )]
     public bool UseCompatWidget { get; [UsedImplicitly] set; } = false;
+
+
+    [CommandOption("-c|--clear")]
+    [Description(
+        "Clear the terminal to show just the QR Code widget."
+    )]
+    public bool ClearTerminal { get; [UsedImplicitly] set; } = false;
 
 
     [CommandOption("-e|--ecc")]
