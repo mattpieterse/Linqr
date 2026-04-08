@@ -35,7 +35,8 @@ public sealed class EncodeCommand
 
         var qrAppearance = new QrAppearance(
             ForegroundColor: options.ForegroundColor,
-            BackgroundColor: options.BackgroundColor
+            BackgroundColor: options.BackgroundColor,
+            BorderSize: options.Border
         );
 
         QrRenderable qrWidget = (options.UseCanvasWidget)

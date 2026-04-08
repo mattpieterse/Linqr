@@ -19,7 +19,7 @@ public sealed class CompatQrRenderable(QrCode qrCode, QrAppearance appearance)
         RenderOptions options,
         int maxWidth
     ) {
-        var matrix = new QrMatrix(qrCode);
+        var matrix = new QrMatrix(qrCode, appearance.BorderSize);
 
         var foregroundColor = appearance.ForegroundColor;
         var backgroundColor = appearance.BackgroundColor;

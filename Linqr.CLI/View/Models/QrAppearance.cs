@@ -4,5 +4,6 @@ namespace Linqr.CLI.View.Models;
 
 public readonly record struct QrAppearance(
     Color ForegroundColor,
-    Color BackgroundColor
+    Color BackgroundColor,
+    int BorderSize
 );

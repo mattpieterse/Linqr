@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using JetBrains.Annotations;
 using Linqr.CLI.Core.Models;
 using Net.Codecrete.QrCodeGenerator;
 using Spectre.Console;
 using Spectre.Console.Cli;
+using ValidationResult = Spectre.Console.ValidationResult;
 
 namespace Linqr.CLI.Core.Commands;
 
@@ -86,6 +88,14 @@ public sealed class EncodeCommandSettings
     [DefaultValue(1)]
     public int PaddingY { get; [UsedImplicitly] set; }
 
+
+    [CommandOption("--border")]
+    [Description(
+        "Size of the whitespace around the QR Code."
+    )]
+    [DefaultValue(1)]
+    public int Border { get; [UsedImplicitly] set; }
+
 #endregion
 
 #endregion
@@ -99,6 +109,14 @@ public sealed class EncodeCommandSettings
 
         if (UseCanvasWidget && UseCompatWidget)
             return ValidationResult.Error("Cannot use both renderers for a single operation.");
+
+        if (
+            (PaddingX is > 20 or < 1) ||
+            (PaddingY is > 20 or < 1) ||
+            (Border is > 20 or < 1)
+        ) {
+            return ValidationResult.Error("Integers must be between 1 and 20.");
+        }
 
         return ValidationResult.Success();
     }

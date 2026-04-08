@@ -26,7 +26,7 @@ public sealed class CanvasQrRenderable(QrCode qrCode, QrAppearance appearance)
         RenderOptions options,
         int maxWidth
     ) {
-        var matrix = new QrMatrix(qrCode);
+        var matrix = new QrMatrix(qrCode, appearance.BorderSize);
         var canvas = new Canvas(
             matrix.Size,
             matrix.Size
