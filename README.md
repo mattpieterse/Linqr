@@ -5,6 +5,8 @@
 
 # [Linqr CLI][repository-link]
 
+[![wakatime](https://wakatime.com/badge/github/mattpieterse/Linqr.svg?style=flat)](https://wakatime.com/badge/github/mattpieterse/Linqr)
+
 Skeptical of cross-device clipboard services that route your data through third-party servers? 
 
 You _should be_! Linqr bridges the gap between your terminal and mobile device instantly. Built on the latest .NET frameworks with minimal dependencies, Linqr is 100% open-source and keeps your data where it belongs — on your machine. Generate customizable, extensible QR codes with a single command.
