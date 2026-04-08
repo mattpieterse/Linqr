@@ -1,8 +1,10 @@
 ﻿using JetBrains.Annotations;
+using Linqr.CLI.Core.Commands;
 using Linqr.CLI.Core.Injection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Net.Codecrete.QrCodeGenerator;
 using Serilog;
 using Spectre.Console.Cli;
 
@@ -47,6 +49,11 @@ public static class App
             app.Configure(options => {
                 options.SetApplicationName("linqr");
                 options.UseAssemblyInformationalVersion();
+                options.Settings.TrimTrailingPeriod = false;
+
+                // Commands
+
+                options.AddCommand<EncodeCommand>("encode");
             });
 
             app.Run(arguments);

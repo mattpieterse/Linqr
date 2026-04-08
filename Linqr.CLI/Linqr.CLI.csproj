@@ -26,10 +26,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Core\Commands\" />
       <Folder Include="Core\Services\" />
       <Folder Include="Data\" />
-      <Folder Include="View\Components\" />
       <Folder Include="View\Presentation\" />
     </ItemGroup>
 
