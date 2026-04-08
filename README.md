@@ -18,7 +18,9 @@ You _should be_! Linqr bridges the gap between your terminal and mobile device i
 <br />
 </div>
 
-<img width="1920" height="1080" alt="Screenshot 2026-04-08 121622" src="https://github.com/user-attachments/assets/3deb4443-9b5a-4545-89ed-3ac39d4a70ae" />
+<img width="2000" height="1280" alt="image" src="https://github.com/user-attachments/assets/d219b16e-0123-48cd-97e5-0e382ed54fbc" />
+
+<img width="2000" height="1280" alt="image" src="https://github.com/user-attachments/assets/34214dac-59b2-4f01-8dca-b3d2c13464cf" />
 
 ## 🌍 [Contributing](#-contributing)
 
