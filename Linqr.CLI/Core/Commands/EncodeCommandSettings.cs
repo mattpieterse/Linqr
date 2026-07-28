@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using JetBrains.Annotations;
 using Linqr.CLI.Core.Models;
-using Net.Codecrete.QrCodeGenerator;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using ValidationResult = Spectre.Console.ValidationResult;
@@ -21,30 +19,29 @@ public sealed class EncodeCommandSettings
     [Description(
         "The text you wish to encode and display as a QR Code."
     )]
-    public string Text { get; [UsedImplicitly] set; } = string.Empty;
-
+    public string[] Text { get; [UsedImplicitly] set; } = [];
 
 #region Arguments > Flags
 
-    [CommandOption("--use-canvas")]
+    [CommandOption("-v|--visualizer")]
     [Description(
-        "Draw the QR code using the improved canvas (may cause artifacts)."
+        $"""
+         Select the rendering engine to use to draw your QR Code.
+         [DIM]Options: 
+             - {nameof(VisualizerFlags.Compat)} [[1]]
+             - {nameof(VisualizerFlags.Canvas)} [[2]][/]
+         """
     )]
-    public bool UseCanvasWidget { get; [UsedImplicitly] set; } = false;
-
-
-    [CommandOption("--use-compat")]
-    [Description(
-        "Draw the QR code using the ASCII-only compatability renderer (default)."
-    )]
-    public bool UseCompatWidget { get; [UsedImplicitly] set; } = false;
+    [DefaultValue(nameof(VisualizerFlags.Compat))]
+    public VisualizerFlags Visualizer { get; [UsedImplicitly] set; }
 
 
     [CommandOption("-c|--clear")]
     [Description(
         "Clear the terminal to show just the QR Code widget."
     )]
-    public bool ClearTerminal { get; [UsedImplicitly] set; } = false;
+    [DefaultValue(false)]
+    public bool ClearTerminal { get; [UsedImplicitly] set; }
 
 
     [CommandOption("-e|--ecc")]
@@ -52,26 +49,17 @@ public sealed class EncodeCommandSettings
         $"""
          Set the error correction level to use. Higher settings increase the size and complexity of the QR code but drastically improve reliability by adding extra blocks to the pattern.
          [DIM]Options: 
-             - {nameof(EccFlags.L)} (~07%)
-             - {nameof(EccFlags.M)} (~15%)
-             - {nameof(EccFlags.H)} (~30%)
-             - {nameof(EccFlags.Q)} (~25%)[/]
+             - {nameof(EccFlags.L)} [[1]] (~07%)
+             - {nameof(EccFlags.M)} [[2]] (~15%)
+             - {nameof(EccFlags.H)} [[3]] (~30%)
+             - {nameof(EccFlags.Q)} [[4]] (~25%)[/]
          """
     )]
     [DefaultValue(nameof(EccFlags.H))]
     public EccFlags ErrorCorrection { get; [UsedImplicitly] set; }
 
 
-    [CommandOption("--background-color")]
-    [Description(
-        "Set the background color of the QR code widget in RGB format."
-    )]
-    [TypeConverter(typeof(HexColorConverter))]
-    [DefaultValue("#FFFFFF")]
-    public Color BackgroundColor { get; [UsedImplicitly] set; }
-
-
-    [CommandOption("--foreground-color")]
+    [CommandOption("-f|--foreground-color")]
     [Description(
         "Set the foreground color of the QR code widget in RGB format."
     )]
@@ -80,20 +68,43 @@ public sealed class EncodeCommandSettings
     public Color ForegroundColor { get; [UsedImplicitly] set; }
 
 
-    [CommandOption("--padding-x")]
+    [CommandOption("-b|--background-color")]
+    [Description(
+        "Set the background color of the QR code widget in RGB format."
+    )]
+    [TypeConverter(typeof(HexColorConverter))]
+    [DefaultValue("#FFFFFF")]
+    public Color BackgroundColor { get; [UsedImplicitly] set; }
+
+
+    [CommandOption("-i|--invert")]
+    [Description(
+        "Convenience flag to swap the background and foreground colours."
+    )]
+    [DefaultValue(false)]
+    public bool InvertColors { get; [UsedImplicitly] set; }
+
+
+    [CommandOption("--margin-x")]
     [Description(
         "Visual offset from the edge of the window on the x-axis."
     )]
-    [DefaultValue(1)]
-    public int PaddingX { get; [UsedImplicitly] set; }
+    public int MarginX { get; [UsedImplicitly] set; }
 
 
-    [CommandOption("--padding-y")]
+    [CommandOption("--margin-y")]
     [Description(
         "Visual offset from the edge of the window on the y-axis."
     )]
-    [DefaultValue(1)]
-    public int PaddingY { get; [UsedImplicitly] set; }
+    public int MarginY { get; [UsedImplicitly] set; }
+
+
+    [CommandOption("-m|--margin")]
+    [Description(
+        "Visual offset from the edge of the window."
+    )]
+    [DefaultValue(0)]
+    public int Margin { get; [UsedImplicitly] set; }
 
 
     [CommandOption("--border")]
@@ -111,21 +122,36 @@ public sealed class EncodeCommandSettings
 
     /// <inheritdoc />
     public override ValidationResult Validate() {
-        if (string.IsNullOrWhiteSpace(Text))
-            return ValidationResult.Error("Link is a required string and cannot be empty.");
-
-        if (UseCanvasWidget && UseCompatWidget)
-            return ValidationResult.Error("Cannot use both renderers for a single operation.");
-
-        if (
-            (PaddingX is > 20 or < 1) ||
-            (PaddingY is > 20 or < 1) ||
-            (Border is > 20 or < 1)
-        ) {
-            return ValidationResult.Error("Integers must be between 1 and 20.");
+        if (Text.Length == 0 || Text.All(string.IsNullOrWhiteSpace)) {
+            return ValidationResult.Error("Text is required and cannot be empty.");
         }
 
-        return ValidationResult.Success();
+        if (!Enum.IsDefined(Visualizer)) {
+            return ValidationResult.Error("Visualizer must be a valid rendering engine.");
+        }
+
+        if (!Enum.IsDefined(ErrorCorrection)) {
+            return ValidationResult.Error("Error correction level must be valid.");
+        }
+
+        if (Border is < 1 or > 20) {
+            return ValidationResult.Error("Border must be between 1 and 20.");
+        }
+
+        switch (Margin) {
+        case (< 0) or (> 20):
+            return ValidationResult.Error("Margin must be between 0 and 20.");
+        case (> 0):
+            return ValidationResult.Success();
+        }
+
+        if (MarginX is < 0 or > 20) {
+            return ValidationResult.Error("MarginX must be between 0 and 20.");
+        }
+
+        return (MarginY is < 0 or > 20)
+            ? ValidationResult.Error("MarginY must be between 0 and 20.")
+            : ValidationResult.Success();
     }
 
 #endregion

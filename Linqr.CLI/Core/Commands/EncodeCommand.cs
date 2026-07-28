@@ -24,37 +24,44 @@ public sealed class EncodeCommand
         EncodeCommandSettings options,
         CancellationToken ctx
     ) {
-        var qrCode = QrCode.EncodeText(
-            options.Text,
-            options.ErrorCorrection switch {
-                EccFlags.L => QrCode.Ecc.Low, EccFlags.M => QrCode.Ecc.Medium,
-                EccFlags.H => QrCode.Ecc.High, EccFlags.Q => QrCode.Ecc.Quartile,
-                _ => throw new InvalidEnumArgumentException()
-            }
-        );
-
         var qrAppearance = new QrAppearance(
-            ForegroundColor: options.ForegroundColor,
-            BackgroundColor: options.BackgroundColor,
+            ForegroundColor: (options.InvertColors) ? options.BackgroundColor : options.ForegroundColor,
+            BackgroundColor: (options.InvertColors) ? options.ForegroundColor : options.BackgroundColor,
             BorderSize: options.Border
         );
 
-        QrRenderable qrWidget = (options.UseCanvasWidget)
-            ? new CanvasQrRenderable(qrCode, qrAppearance)
-            : new CompatQrRenderable(qrCode, qrAppearance);
+        if (options.ClearTerminal) AnsiConsole.Clear();
 
-        var panel = new Panel(qrWidget) {
-            Border = BoxBorder.None,
-            Padding = new Padding(
-                horizontal: options.PaddingX,
-                vertical: options.PaddingY
-            )
-        };
+        var request = options.Text
+            .Where(text => !string.IsNullOrWhiteSpace(text));
 
-        if (options.ClearTerminal)
-            AnsiConsole.Clear();
+        foreach (var input in request) {
+            var qrCode = QrCode.EncodeText(
+                input,
+                options.ErrorCorrection switch {
+                    EccFlags.L => QrCode.Ecc.Low, EccFlags.M => QrCode.Ecc.Medium,
+                    EccFlags.H => QrCode.Ecc.High, EccFlags.Q => QrCode.Ecc.Quartile,
+                    _ => throw new InvalidEnumArgumentException()
+                }
+            );
 
-        AnsiConsole.Write(panel);
+            QrRenderable qrWidget = (options.Visualizer == VisualizerFlags.Canvas)
+                ? new CanvasQrRenderable(qrCode, qrAppearance)
+                : new CompatQrRenderable(qrCode, qrAppearance);
+
+            var panel = new Panel(qrWidget) {
+                Border = BoxBorder.None,
+                Padding = (options.Margin) switch {
+                    > 0 => new Padding(options.Margin),
+                    _ => new Padding(
+                        horizontal: options.MarginX,
+                        vertical: options.MarginY
+                    )
+                }
+            };
+
+            AnsiConsole.Write(panel);
+        }
 
         return (int) ExitCode.Success;
     }
