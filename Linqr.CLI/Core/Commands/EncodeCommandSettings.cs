@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
+using Linqr.CLI.Core.Helpers;
 using Linqr.CLI.Core.Models;
+using Net.Codecrete.QrCodeGenerator;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using ValidationResult = Spectre.Console.ValidationResult;
 
 namespace Linqr.CLI.Core.Commands;
 
@@ -121,38 +122,8 @@ public sealed class EncodeCommandSettings
 #region Validator
 
     /// <inheritdoc />
-    public override ValidationResult Validate() {
-        if (Text.Length == 0 || Text.All(string.IsNullOrWhiteSpace)) {
-            return ValidationResult.Error("Text is required and cannot be empty.");
-        }
-
-        if (!Enum.IsDefined(Visualizer)) {
-            return ValidationResult.Error("Visualizer must be a valid rendering engine.");
-        }
-
-        if (!Enum.IsDefined(ErrorCorrection)) {
-            return ValidationResult.Error("Error correction level must be valid.");
-        }
-
-        if (Border is < 1 or > 20) {
-            return ValidationResult.Error("Border must be between 1 and 20.");
-        }
-
-        switch (Margin) {
-        case (< 0) or (> 20):
-            return ValidationResult.Error("Margin must be between 0 and 20.");
-        case (> 0):
-            return ValidationResult.Success();
-        }
-
-        if (MarginX is < 0 or > 20) {
-            return ValidationResult.Error("MarginX must be between 0 and 20.");
-        }
-
-        return (MarginY is < 0 or > 20)
-            ? ValidationResult.Error("MarginY must be between 0 and 20.")
-            : ValidationResult.Success();
-    }
+    public override ValidationResult Validate()
+        => EncodeCommandValidator.Validate(this);
 
 #endregion
 }

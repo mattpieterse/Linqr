@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using JetBrains.Annotations;
+using Linqr.CLI.Core.Helpers;
 using Linqr.CLI.Core.Models;
 using Linqr.CLI.View.Components;
 using Linqr.CLI.View.Models;
@@ -38,11 +39,9 @@ public sealed class EncodeCommand
         foreach (var input in request) {
             var qrCode = QrCode.EncodeText(
                 input,
-                options.ErrorCorrection switch {
-                    EccFlags.L => QrCode.Ecc.Low, EccFlags.M => QrCode.Ecc.Medium,
-                    EccFlags.H => QrCode.Ecc.High, EccFlags.Q => QrCode.Ecc.Quartile,
-                    _ => throw new InvalidEnumArgumentException()
-                }
+                QrCodeOptionsMapper.ToQrEcc(
+                    options.ErrorCorrection
+                )
             );
 
             QrRenderable qrWidget = (options.Visualizer == VisualizerFlags.Canvas)
