@@ -1,9 +1,13 @@
 <div align="center">
   <a name="top"></a>
 
-<img width="150" height="150" alt="logo" src="https://github.com/user-attachments/assets/5604a014-0a3a-4daa-9bf5-066be823a379" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/3ab1a4b3-927a-4400-8455-dc6aba11ec30">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/a6132434-e185-4694-a538-9e649dd5eebb">
+  <img alt="logo" width="140" height="auto" src="https://github.com/user-attachments/assets/a6132434-e185-4694-a538-9e649dd5eebb">
+</picture>
 
-# [Linqr CLI][repository-link]
+# [Linqr CLI][repository]
 
 [![wakatime](https://wakatime.com/badge/github/mattpieterse/Linqr.svg?style=flat)](https://wakatime.com/badge/github/mattpieterse/Linqr)
 
@@ -24,6 +28,9 @@ command.
 <img width="2000" height="1280" alt="image" src="https://github.com/user-attachments/assets/d219b16e-0123-48cd-97e5-0e382ed54fbc" />
 
 <img width="2000" height="1280" alt="image" src="https://github.com/user-attachments/assets/34214dac-59b2-4f01-8dca-b3d2c13464cf" />
+
+<br />
+<br />
 
 ## [Features][repository]
 
@@ -50,6 +57,8 @@ listeners, or copied and pasted outside the terminal.
 </div>
 
 ## [Community][repository]
+
+![badge](https://shieldcn.dev/badge/Construction%20Zone-abcde3.svg?size=default&font=geist&logo=lu%3AConstruction&gradient=FFEA61%2CFFD400%2CFFDD3C%2CFFEA61&gap=16)
 
 Contributions are what make the open source community such an amazing place to learn, inspire, 
 and create. If you have a suggestion that would make this project better, please fork the repo 
