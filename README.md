@@ -65,6 +65,15 @@ and create. If you have a suggestion that would make this project better, please
 and create a pull request. You can also open a new issue to request new features or report any 
 bugs needing to be squashed.
 
+<div align="center">
+  <br />
+  <a href="https://github.com/mattpieterse/Linqr/graphs/contributors">
+    <img alt="wall of contributors" src="https://shieldcn.dev/contributors/mattpieterse/Linqr.svg?title=false&preset=transparent&size=48&bots=true&titleAlign=center&mode=dark" />
+  </a>
+  <br />
+  <br />
+</div>
+
 <div align="right">
   <a href="#top">
     <picture>
