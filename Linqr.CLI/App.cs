@@ -1,10 +1,9 @@
-﻿using JetBrains.Annotations;
-using Linqr.CLI.Core.Commands;
-using Linqr.CLI.Core.Injection;
+﻿using Linqr.CLI.Commands.Encode;
+using Linqr.CLI.DependencyInjection;
+using Linqr.SDK.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Net.Codecrete.QrCodeGenerator;
 using Serilog;
 using Spectre.Console.Cli;
 
@@ -41,7 +40,8 @@ public static class App
             builder
                 .UseSerilog()
                 .ConfigureServices((_, services) => {
-                    services.AddLogging(); //
+                    services.AddLogging();
+                    services.AddSingleton<IEncodeService, EncodeService>();
                 });
 
             var app = builder.BuildApplication();
@@ -53,7 +53,21 @@ public static class App
 
                 // Commands
 
-                options.AddCommand<EncodeCommand>("encode");
+                options.AddBranch("encode", branch => {
+                    branch
+                        .AddCommand<EncodeTextCommand>("text")
+                        .WithDescription(
+                            "Encode one or more literal strings as a QR code."
+                        )
+                        .WithAlias("txt");
+
+                    branch
+                        .AddCommand<EncodeFileCommand>("file")
+                        .WithDescription(
+                            "Encode the binary contents of one or more file-paths as a QR code."
+                        )
+                        .WithAlias("bin");
+                });
             });
 
             app.Run(arguments);

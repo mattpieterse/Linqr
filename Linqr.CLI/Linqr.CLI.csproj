@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk = "Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -13,31 +13,30 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="JetBrains.Annotations" Version="2025.2.4" />
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="11.0.0-preview.2.26159.112" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0-preview.2.26159.112" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0-preview.2.26159.112" />
-      <PackageReference Include="Net.Codecrete.QrCodeGenerator" Version="2.1.0" />
-      <PackageReference Include="Serilog" Version="4.3.2-dev-02419" />
-      <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
-      <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1-dev-02330" />
-      <PackageReference Include="Serilog.Sinks.File" Version="8.0.0-nblumhardt-02322" />
-      <PackageReference Include="Spectre.Console.Cli" Version="1.0.0-alpha.0.15" />
+        <PackageReference Include="JetBrains.Annotations" Version="2026.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="11.0.0-preview.7.26381.103" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0-preview.7.26381.103" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0-preview.7.26381.103" />
+        <PackageReference Include="Net.Codecrete.QrCodeGenerator" Version="3.1.0" />
+        <PackageReference Include="Serilog" Version="4.4.1-dev-02443" />
+        <PackageReference Include = "Serilog.Extensions.Hosting" Version = "10.0.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1" />
+        <PackageReference Include = "Serilog.Sinks.File" Version = "8.0.0-nblumhardt-02322" />
+        <PackageReference Include = "Spectre.Console.Cli" Version = "1.0.0-alpha.0.15" />
+        <PackageReference Include="Wacton.Unicolour" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Core\Services\" />
-      <Folder Include="Data\" />
-      <Folder Include="View\Presentation\" />
+        <None Update = "logging.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update = "options.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="logging.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="options.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+        <ProjectReference Include = "..\Linqr.SDK\Linqr.SDK.csproj" />
     </ItemGroup>
 
 </Project>

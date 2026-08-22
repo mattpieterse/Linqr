@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linqr.CLI", "Linqr.CLI\Linq
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linqr.Test", "Linqr.Test\Linqr.Test.csproj", "{0991E0C4-8044-4078-AF61-1B4AD29187F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linqr.Core", "Linqr.Core\Linqr.Core.csproj", "{E08B1499-ABDA-404C-AFE0-3F713F6D9EE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linqr.SDK", "Linqr.SDK\Linqr.SDK.csproj", "{E08B1499-ABDA-404C-AFE0-3F713F6D9EE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
