@@ -34,7 +34,7 @@ command.
 
 ## [Features][repository]
 
-![badge](https://shieldcn.dev/badge/Construction%20Zone-abcde3.svg?size=default&font=geist&logo=lu%3AConstruction&gradient=FFEA61%2CFFD400%2CFFDD3C%2CFFEA61&gap=16)
+![badge](https://shieldcn.dev/badge/Construction%20Zone-abcde3.svg?size=xs&font=geist&logo=lu%3AConstruction&gradient=FFEA61%2CFFD400%2CFFDD3C%2CFFEA61&gap=10)
 
 ### [Clipboard protection][repository]
 
@@ -58,7 +58,7 @@ listeners, or copied and pasted outside the terminal.
 
 ## [Community][repository]
 
-![badge](https://shieldcn.dev/badge/Construction%20Zone-abcde3.svg?size=default&font=geist&logo=lu%3AConstruction&gradient=FFEA61%2CFFD400%2CFFDD3C%2CFFEA61&gap=16)
+![badge](https://shieldcn.dev/badge/Construction%20Zone-abcde3.svg?size=xs&font=geist&logo=lu%3AConstruction&gradient=FFEA61%2CFFD400%2CFFDD3C%2CFFEA61&gap=10)
 
 Contributions are what make the open source community such an amazing place to learn, inspire, 
 and create. If you have a suggestion that would make this project better, please fork the repo 
