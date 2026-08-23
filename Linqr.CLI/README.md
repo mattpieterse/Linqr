@@ -1,0 +1,1 @@
+﻿# Linqr.CLI
